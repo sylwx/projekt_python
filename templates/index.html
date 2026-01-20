@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projekt Python - Klasyfikacja Ubrań</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f9; color: #333; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .container { background-color: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%; max-width: 500px; text-align: center; }
+        h1 { color: #444; margin-bottom: 20px; font-size: 24px; }
+        p { margin-bottom: 20px; color: #666; }
+        input[type="file"] { margin-bottom: 20px; }
+        button { background-color: #007bff; color: white; border: none; padding: 12px 24px; font-size: 16px; border-radius: 5px; cursor: pointer; transition: background 0.3s; }
+        button:hover { background-color: #0056b3; }
+        .results { margin-top: 30px; text-align: left; background: #e9ecef; padding: 15px; border-radius: 8px; }
+        .result-item { margin-bottom: 10px; font-size: 18px; }
+        .label { font-weight: bold; display: inline-block; width: 180px; }
+        .error { color: #dc3545; margin-top: 15px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Klasyfikator Fashion MNIST</h1>
+        <p>Wybierz zdjęcie elementu ubioru (np. but, koszulka), aby sprawdzić, jak poradzą sobie modele.</p>
+        
+        <form method="post" enctype="multipart/form-data">
+            <input type="file" name="file" accept="image/*" required>
+            <br>
+            <button type="submit">Analizuj obraz</button>
+        </form>
+
+        {% if res_simple %}
+        <div class="results">
+            <div class="result-item">
+                <span class="label">Model Prosty:</span> {{ res_simple }}
+            </div>
+            <div class="result-item">
+                <span class="label">Model Zaawansowany:</span> {{ res_advanced }}
+            </div>
+        </div>
+        {% endif %}
+        
+        {% if msg %}
+        <p class="error">{{ msg }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>
